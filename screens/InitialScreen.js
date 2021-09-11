@@ -1,5 +1,6 @@
 import React from 'react';
-import{Navbar} from './src/Navbar'
+import{Navbar} from '../src/Navbar'
+import { MelodyItem } from '../src/MelodyItem';
 import { StyleSheet, Text, View,Button, TouchableOpacity, Image  } from 'react-native';
 
 export default function InitialScreen ({ navigation }) {
@@ -13,7 +14,7 @@ export default function InitialScreen ({ navigation }) {
                 <TouchableOpacity 
                     style={styles.button} 
                     onPress={()=>{navigation.navigate('EditMode')}}>
-                    <Image source={require("./assets/favicon.png")}/>
+                    <Image source={require("../assets/favicon.png")}/>
                 </TouchableOpacity>
             </View>
       </View>

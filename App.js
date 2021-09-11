@@ -1,14 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View,Button, TouchableOpacity, Image  } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import{Navbar} from './src/Navbar'
-import { MelodyItem } from './src/MelodyItem';
-import { createStackNavigator } from '@react-navigation/native-stack';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import EditModeScreen from './screens/EditModeScreen';
 import InitialScreen from './screens/InitialScreen';
 
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 
 export default function App() {
@@ -18,12 +17,12 @@ export default function App() {
                 <Stack.Screen
                   component={InitialScreen}
                   name="InitialScreen"
-                  //options={{ headerShown: false }}
+                  options={{ headerShown: false }}
                 />
                 <Stack.Screen
                   component={EditModeScreen}
                   name="EditMode"
-                  //options={}
+                  options={{ headerShown: false }}
                 />
       </Stack.Navigator>
     </NavigationContainer>
