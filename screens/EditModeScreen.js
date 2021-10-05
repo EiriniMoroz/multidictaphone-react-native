@@ -1,28 +1,67 @@
-import React from 'react';
+import React, {useState} from 'react';
 import{Navbar} from '../src/Navbar'
 import { StyleSheet, Text, View,Button, TouchableOpacity, Image  } from 'react-native';
 import { TrackItem } from '../src/TrackItem';
 
 export default function EditModeScreen() {
+    const [tracks, setTracks] = useState([])
+
+    const addTrack = () => {
+        // const newTrack = {
+        //     id: Date.now().toString(),
+        // }
+
+        //setTracks(tracks.concat([ newTrack]))
+        // setTracks((prevTrack) => {
+        //     return [
+        //         ...prevTrack,
+        //         newTrack
+        //     ]
+        // })
+
+        setTracks(prev => [
+            ...prev, 
+            {
+             id: Date.now().toString()
+            }
+    ])
+    }
+
+    const removeTrack = (id, e) => {
+        const tracks = Object.assign([], this.users);
+        tracks.splice(tracks.indexOf(id),1)
+        this.setState({tracks: tracks})
+    }
+
+    const pressPlusButton = () => {
+        addTrack()
+    }
     return (
         <View style={styles.globalContainer}>
             <View style={styles.contentContainer}>
                 <Navbar />
-                <TrackItem />
+                <View>
+                    {tracks.map((track, index) => (
+                        <TrackItem track={track} 
+                        key = {track.id}
+                        delEvent = {this.removeTrack.bind(this, index)} />
+                    ))
+                    }
+                </View>
             </View>
         
             <View style={styles.container}>
                 <TouchableOpacity
-                    onPress={()=>{}}>
-                    <Image source={require("../assets/favicon.png")}/>
+                    onPress={pressPlusButton}>
+                    <Image source={require("../assets/plusBSmall2.png")}/>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={()=>{}}>
-                    <Image source={require("../assets/favicon.png")}/>
+                    <Image source={require("../assets/bigPlay2.png")}/>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={()=>{}}>
-                    <Image source={require("../assets/favicon.png")}/>
+                    <Image source={require("../assets/save.png")}/>
                 </TouchableOpacity>
             </View>
         </View>

@@ -10,11 +10,11 @@ export const TrackItem = props => {
             <View style={styles.buttons}>
                     <TouchableOpacity
                         onPress={()=>{}}>
-                        <Image source={require("../assets/favicon.png")}/>
+                        <Image source={require("../assets/recordButton.png")}/>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={()=>{}}>
-                        <Image source={require("../assets/favicon.png")}/>
+                        onPress={props.delEvent}>
+                        <Image source={require("../assets/croce.png")}/>
                     </TouchableOpacity>
             </View>
         </View>
@@ -23,7 +23,7 @@ export const TrackItem = props => {
 
 const styles = StyleSheet.create({
     container: {
-        height: 50,
+        height: 55,
         //flex: 1,
         flexDirection: 'row'
     },
@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
     },
     buttons: {
         alignItems: 'flex-end',
-        flexDirection: 'row'
+        //justifyContent: 'space-around',
+        flexDirection: 'row',
+
     }
 })
