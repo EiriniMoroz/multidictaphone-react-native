@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, setState} from 'react';
 import{Navbar} from '../src/Navbar'
 import { StyleSheet, Text, View,Button, TouchableOpacity, Image  } from 'react-native';
 import { TrackItem } from '../src/TrackItem';
@@ -28,9 +28,16 @@ export default function EditModeScreen() {
     }
 
     const removeTrack = (id, e) => {
-        const tracks = Object.assign([], this.users);
-        tracks.splice(tracks.indexOf(id),1)
-        this.setState({tracks: tracks})
+        //const tracks = Object.assign([], tracks);
+        //tracks.splice(tracks.indexOf(id),1)
+        //setTracks({tracks: tracks})
+        // setTracks(prev => [
+        //     tracks
+        // ])
+        const newData = [...tracks];
+        const prevIndex = tracks.findIndex(item => item.key === id);
+        newData.splice(prevIndex, 1);
+        setTracks(newData);
     }
 
     const pressPlusButton = () => {
@@ -44,7 +51,8 @@ export default function EditModeScreen() {
                     {tracks.map((track, index) => (
                         <TrackItem track={track} 
                         key = {track.id}
-                        delEvent = {this.removeTrack.bind(this, index)} />
+                        onPress = {() => removeTrack(index)}
+                        />
                     ))
                     }
                 </View>

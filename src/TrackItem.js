@@ -1,7 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 
-export const TrackItem = props => {
+export const TrackItem = (props) => {
+    const {onPress} = props;
     return (
         <View style={styles.container}>
             <View style={styles.text}>
@@ -13,7 +14,7 @@ export const TrackItem = props => {
                         <Image source={require("../assets/recordButton.png")}/>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={props.delEvent}>
+                        onPress={onPress}>
                         <Image source={require("../assets/croce.png")}/>
                     </TouchableOpacity>
             </View>
