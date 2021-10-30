@@ -34,8 +34,10 @@ export default function EditModeScreen() {
         // setTracks(prev => [
         //     tracks
         // ])
+        console.log("deleting with id " + id);
         const newData = [...tracks];
-        const prevIndex = tracks.findIndex(item => item.key === id);
+        const prevIndex = tracks.findIndex(item => item.id === id);
+        console.log("will remove at position " + prevIndex);
         newData.splice(prevIndex, 1);
         setTracks(newData);
     }
@@ -51,7 +53,11 @@ export default function EditModeScreen() {
                     {tracks.map((track, index) => (
                         <TrackItem track={track} 
                         key = {track.id}
-                        onPress = {() => removeTrack(index)}
+                        id = {track.id}
+                        onPress = {() => removeTrack(track.id)}
+                        isRecording = {false}
+                        isRecorded = {false}
+                        isPlaying = {false}
                         />
                     ))
                     }
