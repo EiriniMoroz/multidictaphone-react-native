@@ -2,7 +2,7 @@ import React, {useState, useRef, forwardRef, useImperativeHandle } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 
 import { Audio  } from 'expo-av';
-import * as FileSystem from 'expo-file-system';
+//import * as FileSystem from 'expo-file-system';
 
 let recording = new Audio.Recording();
 

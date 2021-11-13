@@ -1,7 +1,7 @@
 import React from 'react';
 import{Navbar} from '../src/Navbar'
 import { MelodyItem } from '../src/MelodyItem';
-import * as FileSystem from 'expo-file-system';
+//import * as FileSystem from 'expo-file-system';
 
 import { StyleSheet, Text, View,Button, TouchableOpacity, Image  } from 'react-native';
 
