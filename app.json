@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [ "AUDIO_RECORDING" ]
     },
     "web": {
       "favicon": "./assets/favicon.png"

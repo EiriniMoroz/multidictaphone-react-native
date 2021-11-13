@@ -1,9 +1,12 @@
 import React from 'react';
 import{Navbar} from '../src/Navbar'
 import { MelodyItem } from '../src/MelodyItem';
+import * as FileSystem from 'expo-file-system';
+
 import { StyleSheet, Text, View,Button, TouchableOpacity, Image  } from 'react-native';
 
 export default function InitialScreen ({ navigation }) {
+    //FileSystem.makeDirectoryAsync("file://1");
     return (
         <View style={styles.container}>
             <View style={styles.contentContainer}>
@@ -14,7 +17,7 @@ export default function InitialScreen ({ navigation }) {
                 <TouchableOpacity 
                     style={styles.button} 
                     onPress={()=>{navigation.navigate('EditMode')}}>
-                    <Image source={require("../assets/favicon.png")}/>
+                    <Image source={require("../assets/recordButton.png")}/>
                 </TouchableOpacity>
             </View>
       </View>

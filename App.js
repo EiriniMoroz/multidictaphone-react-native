@@ -24,6 +24,7 @@ export default function App() {
                   name="EditMode"
                   options={{ headerShown: false }}
                 />
+               
       </Stack.Navigator>
     </NavigationContainer>
   );

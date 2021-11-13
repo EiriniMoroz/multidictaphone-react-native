@@ -1,67 +1,79 @@
-import React, {useState, setState} from 'react';
+import React, {useState, useRef,createRef, setState} from 'react';
 import{Navbar} from '../src/Navbar'
-import { StyleSheet, Text, View,Button, TouchableOpacity, Image  } from 'react-native';
+import { StyleSheet, Text, View,Button, TouchableOpacity, Image,ScrollView  } from 'react-native';
 import { TrackItem } from '../src/TrackItem';
 
 export default function EditModeScreen() {
+    
+    const childRef1 = useRef()
+
     const [tracks, setTracks] = useState([])
-
+    const [isRec, SetIsRec] = useState(false);
+    const [ trackCount, setTrackCount] = useState(0);
     const addTrack = () => {
-        // const newTrack = {
-        //     id: Date.now().toString(),
-        // }
-
-        //setTracks(tracks.concat([ newTrack]))
-        // setTracks((prevTrack) => {
-        //     return [
-        //         ...prevTrack,
-        //         newTrack
-        //     ]
-        // })
-
         setTracks(prev => [
             ...prev, 
             {
-             id: Date.now().toString()
+             id: Date.now().toString(),
+             isRecorded: false,
+             isPlaying: false,
+             childRef: createRef(), 
+             number: trackCount
             }
     ])
     }
 
     const removeTrack = (id, e) => {
-        //const tracks = Object.assign([], tracks);
-        //tracks.splice(tracks.indexOf(id),1)
-        //setTracks({tracks: tracks})
-        // setTracks(prev => [
-        //     tracks
-        // ])
-        console.log("deleting with id " + id);
         const newData = [...tracks];
         const prevIndex = tracks.findIndex(item => item.id === id);
-        console.log("will remove at position " + prevIndex);
         newData.splice(prevIndex, 1);
         setTracks(newData);
     }
 
     const pressPlusButton = () => {
+        setTrackCount(trackCount+1);
         addTrack()
+    }
+    const playAll = () => {
+        
+        tracks.forEach(track => {
+            if(track.isRecorded){
+                console.log("is rec ",track.id);
+                track.childRef.current.playSound();
+                tracks[tracks.findIndex(item => item.id === track.id)].isPlaying = true;
+            }
+        })
+        
+    }
+    const stopAll = () => {
+        tracks.forEach(track => {
+            if(track.isPlaying){
+                console.log("Stopping ",track.id);
+                track.childRef.current.stopSound();
+                tracks[tracks.findIndex(item => item.id === track.id)].isPlaying = false;
+            }
+        })
+    }
+    const updateRecState = (id) => {
+        tracks[tracks.findIndex(item => item.id === id)].isRecorded = true;
     }
     return (
         <View style={styles.globalContainer}>
             <View style={styles.contentContainer}>
                 <Navbar />
-                <View>
+                <ScrollView>
                     {tracks.map((track, index) => (
                         <TrackItem track={track} 
                         key = {track.id}
                         id = {track.id}
-                        onPress = {() => removeTrack(track.id)}
-                        isRecording = {false}
-                        isRecorded = {false}
-                        isPlaying = {false}
+                        onPress = {() => removeTrack(track.id)}                       
+                        onChangeRecState = {() => updateRecState(track.id)}
+                        ref={track.childRef}
+                        number ={track.number}
                         />
                     ))
                     }
-                </View>
+                </ScrollView>
             </View>
         
             <View style={styles.container}>
@@ -70,18 +82,21 @@ export default function EditModeScreen() {
                     <Image source={require("../assets/plusBSmall2.png")}/>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={()=>{}}>
+                    onPress={playAll}>
                     <Image source={require("../assets/bigPlay2.png")}/>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={()=>{}}>
-                    <Image source={require("../assets/save.png")}/>
+                    onPress={stopAll}>
+                    <Image source={require("../assets/bigStop.png")}/>
                 </TouchableOpacity>
             </View>
         </View>
     );
-}
+
     
+}
+
+
 
 const styles = StyleSheet.create({
     globalContainer: {
