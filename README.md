@@ -2,6 +2,7 @@
 A React Native project
 
 To run project on your phone you need to:
+0. Install Expo go app on your phone (for android)
 1. Enable USB debugging on your device, you will first need to enable the "Developer options" menu
    by going to Settings → About phone → Software information and then tapping the Build number row at the bottom seven times. 
    You can then go back to Settings → Developer options to enable "USB debugging".
